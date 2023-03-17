@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fiap.checkpoint1.controller.dto.EmpregadoCreate;
+import br.com.fiap.checkpoint1.controller.dto.EmpregadoUpdate;
 import br.com.fiap.checkpoint1.model.Empregado;
 import br.com.fiap.checkpoint1.service.EmpregadoService;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,19 +32,21 @@ public class EmpregadoController {
     @ResponseBody
 	public Empregado create(@RequestBody EmpregadoCreate dto) {
 		Empregado empregadoInsert = new Empregado();
-		System.out.println(dto);
 		empregadoInsert.setNome(dto.getNome());
 		empregadoInsert.setEndereco(dto.getEndereco());
-		
-		
+
 		Empregado result = empregadoService.save(empregadoInsert);
-		System.out.println(result);
 		return result;
 	}
 	
 	@PutMapping
-	public Empregado update(@RequestBody Empregado empregado) {
-		Empregado result = empregadoService.save(empregado);
+	public Empregado update(@RequestBody EmpregadoUpdate dto) {
+		Empregado empregadoInsert = new Empregado();
+		empregadoInsert.setNome(dto.getNome());
+		empregadoInsert.setEndereco(dto.getEndereco());
+		empregadoInsert.setCodigoEmpregado(dto.getId());
+
+		Empregado result = empregadoService.save(empregadoInsert);
 		return result;
 	}
 	
